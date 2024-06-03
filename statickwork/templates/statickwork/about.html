@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    <title>About page here</title>
+    
+{% endblock title %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'statickwork/style.css' %}">
+{% endblock css_files %}
+
+{% block content %}
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            {% for navelement in navelements %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{navelement.link}}">{{navelement.name}}</span></a>
+                </li>
+            
+            {% endfor %}
+                
+                
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+  <div class="row">
+  {% for post in posts %}
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4 mb-4">
+      <div class="card">
+        <img class="card-img" src="{{post.image}}" alt="Bologna">
+        <div class="card-img-overlay">
+          <a href="#" class="btn btn-light btn-sm">{{post.category}}</a>
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">{{post.title}}</h4>
+          <small class="text-muted cat">
+            <i class="far fa-clock text-info"></i> {{post.duration}}
+            <i class="fas fa-users text-info"></i> 4 portions
+          </small>
+          <p class="card-text">{{post.content}}</p>
+          <a href="#" class="btn btn-info">{{post.btnText}}</a>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+          <div class="views">Oct 20, 12:45PM
+          </div>
+          <div class="stats">
+           	<i class="far fa-eye"></i> 1347
+            <i class="far fa-comment"></i> 12
+          </div>
+           
+        </div>
+        <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">Comments</h5>
+            {% if post.comments %}
+            <ul class="list-unstyled">
+                <!-- Individual Comment -->
+                {% for comment in post.comments %}
+                    <li class="media">
+                        <img src="..." class="mr-3" alt="...">
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1">{{comment.name}}</h5>
+                            {{comment.text}}
+                        </div>
+                    </li>
+                
+                {% endfor %}
+
+            </ul>
+            
+            {% else %}
+            <h5>No comment available yet</h5>
+            {% endif %}
+            
+        </div>
+    </div>
+      </div>
+    </div>
+    <!-- Comment Section -->
+    
+    
+  
+  {% endfor %}
+    
+  </div>
+</div>
+{% endblock content %}
